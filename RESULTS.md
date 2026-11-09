@@ -12,7 +12,7 @@
 - Actual result: status 500 with an empty body
 - Severity: Medium
 ## Part A
-- Step A4, status codes when the other user reads, changes and deletes:
+- Step A4, status codes when the other user reads, changes and deletes: read 404, update 404, delete 404
 ## Part B
 1.
 2.
@@ -22,3 +22,28 @@
 6.
 7.
 8.
+
+
+
+# API lab
+
+## Install and run
+pip install -r requirements.txt
+pytest -v
+
+## Input domain model for POST /api/ratings
+
+| Characteristic | Block | Value in tests | Test |
+|---|---|---|---|
+| C1 Value of stars | below 1 | 0 | test_stars_out_of_range[0] |
+| C1 Value of stars | 1 to 5 (base) | 3 | test_base_choice_is_saved |
+| C1 Value of stars | above 5 | 6 | test_stars_out_of_range[6] |
+| C2 Type of stars | whole number (base) | 3 | test_base_choice_is_saved |
+| C2 Type of stars | decimal | 3.5 | (กรอกหลัง A2) |
+| C2 Type of stars | text | "3" | (กรอกหลัง A2) |
+| C2 Type of stars | missing | no field | (กรอกหลัง A2) |
+| C3 Pizza | exists (base) | a new pizza | test_base_choice_is_saved |
+| C3 Pizza | does not exist | 999999999 | (กรอกหลัง A2) |
+| C4 Token | the user's own (base) | from auth | test_base_choice_is_saved |
+| C4 Token | none | no header | (กรอกหลัง A2) |
+| C4 Token | wrong length | token short | (กรอกหลัง A2) |
